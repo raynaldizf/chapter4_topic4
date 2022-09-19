@@ -23,6 +23,12 @@ class MainActivity : AppCompatActivity() {
             saveData()
             Toast.makeText(this,"Data Berhasil Disimpan",Toast.LENGTH_SHORT).show()
         }
+        binding.btnShow.setOnClickListener{
+            showData()
+        }
+        binding.btnReset.setOnClickListener{
+            resetData()
+        }
     }
     fun saveData(){
         var getNim = binding.etNim.text.toString()
@@ -36,6 +42,16 @@ class MainActivity : AppCompatActivity() {
     }
 
     fun showData(){
-        
+        binding.txtNim.text = sharedPrefs.getString("nim","")
+        binding.txtName.text = sharedPrefs.getString("name","")
+
+    }
+
+    fun resetData(){
+        var pref = sharedPrefs.edit()
+        pref.clear()
+        pref.apply()
+
+        showData()
     }
 }
